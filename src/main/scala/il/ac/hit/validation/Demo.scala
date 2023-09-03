@@ -7,7 +7,7 @@ object Demo {
 //    val result1:ValidationResult = UserValidation.emailEndsWithIL.apply(user1)
 //    println(result1.isValid)
 
-    val result3 : ValidationResult = UserValidation2.emailEndsWithIL.apply(user1);
+    val result3 : ValidationResult = UserValidation2.emailEndsWithIL.and(UserValidation2.emailLengthBiggerThan10).apply(user1)
     print(result3.isValid)
 
 
