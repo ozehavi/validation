@@ -17,7 +17,6 @@ class User(usernameP: String, emailP: String, passwordP: String, ageP: Int) {
   password = passwordP
   age = ageP
 
-
   def username_=(value: String):Unit =
   {
     _username = value;
