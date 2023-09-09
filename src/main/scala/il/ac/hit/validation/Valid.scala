@@ -5,7 +5,6 @@ package il.ac.hit.validation
  * @param reason an optional reason for the validation result.
  */
 class Valid(val reason: String = "") extends ValidationResult {
-
   /**
    * Checks if the validation result is valid.
    * @return true since this represents a valid result.
