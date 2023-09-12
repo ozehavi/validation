@@ -1,21 +1,6 @@
 package il.ac.hit.validation
 
 /**
- * Custom exception classes for handling various invalid user data scenarios:
- *
- * - [[InvalidUserName]]: Represents an invalid user name.
- * - [[InvalidEmailException]]: Represents an invalid email address.
- * - [[InvalidPassword]]: Represents an invalid password.
- * - [[InvalidAgeException]]: Represents an invalid age value.
- *
- * Each exception provides a descriptive error message to help identify the specific issue.
- */
-case class InvalidUserName(message: String) extends Exception(message)
-case class InvalidEmailException(message: String) extends Exception(message)
-case class InvalidPassword(message: String) extends Exception(message)
-case class InvalidAgeException(message: String) extends Exception(message)
-
-/**
  * Represents a User with properties such as username, email, password, and age.
  *
  * @param userNameP The username of the user.
@@ -61,62 +46,44 @@ class User(userNameP: String, emailP: String, passwordP: String, ageP: Int) {
   /**
    * Set the username of the user.
    * @param value The new username to set.
-   * @throws InvalidUserName if the provided username does not contain only English letters and numbers or if it is empty.
+   * required: the provided username contains only English letters and numbers and is not empty.
    */
   def userName_=(value: String):Unit =
   {
-    if (value.isEmpty) {
-      throw InvalidUserName("Username cannot be empty.")
-    } else if (value.matches("^[a-zA-Z0-9]+$")) {
-      _userName = value
-    } else {
-      throw InvalidUserName("Username must contain only English letters and numbers.")
-    }
+    require(value.nonEmpty && value.matches("^[a-zA-Z0-9]+$"))
+    _userName = value
   }
 
   /**
    * Sets the user's email address.
    *
    * @param value the new email address to set.
-   * @throws InvalidEmailException if the provided email address is not valid or if is empty.
+   * required: the provided email address is valid and is not empty.
    */
   def email_=(value: String): Unit = {
-    if (value.isEmpty) {
-      throw InvalidEmailException("Email cannot be empty.")
-    } else if (isValidEmail(value)) {
-      _email = value
-    } else {
-      throw InvalidEmailException("Invalid email address format.")
-    }
+    require(value.nonEmpty &&(isValidEmail(value)))
+    _email = value
   }
 
   /**
    * Set the password of the user.
    * @param value The new password to set.
-   * @throws InvalidPassword if the provided password does not meet the required format or if it is empty.
+   * required: the provided password meets the required format and is not empty.
    */
   def password_=(value: String): Unit = {
-    if (value.isEmpty) {
-      throw InvalidEmailException("Password cannot be empty.")
-    } else if (isValidPassword(value)) {
-      _password = value
-    } else {
-      throw InvalidPassword("Invalid password format.")
-    }
+    require(value.nonEmpty && isValidPassword(value))
+    _password = value
   }
 
   /**
    * Sets the user's age.
    *
    * @param value the new age to set.
-   * @throws IllegalArgumentException if the provided age is not within a valid range.
+   * required: the provided age is within a valid range.
    */
   def age_=(value: Int): Unit = {
-    if (isValidAge(value)) {
-      _age = value
-    } else {
-      throw InvalidAgeException("Invalid age value. Age must be within 0-120")
-    }
+    require(isValidAge(value))
+    _age = value
   }
 
   /**
