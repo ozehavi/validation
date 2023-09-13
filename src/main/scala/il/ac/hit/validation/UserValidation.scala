@@ -35,15 +35,7 @@ trait UserValidation extends (User => ValidationResult) {
 /**
  * Define the UserValidation object
  */
-object UserValidation extends UserValidation {
-  /**
-   * This method is used to validate a User object using the implemented validation rules.
-   *
-   * @param user The User object to be validated.
-   * @return A ValidationResult representing the result of the validation.
-   */
-  def apply(user: User): ValidationResult = new Valid // Default, always valid
-
+object UserValidation {
   /**
    * Combines multiple UserValidation instances and checks if they all are valid.
    *

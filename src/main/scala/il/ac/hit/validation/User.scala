@@ -50,7 +50,7 @@ class User(userNameP: String, emailP: String, passwordP: String, ageP: Int) {
    */
   def userName_=(value: String):Unit =
   {
-    require(value.nonEmpty && value.matches("^[a-zA-Z0-9]+$"))
+    require(value.nonEmpty && value.matches("^[a-zA-Z0-9]+$"), "User name must contain only English letters and numbers and not be empty.")
     _userName = value
   }
 
@@ -61,7 +61,7 @@ class User(userNameP: String, emailP: String, passwordP: String, ageP: Int) {
    * required: the provided email address is valid and is not empty.
    */
   def email_=(value: String): Unit = {
-    require(value.nonEmpty &&(isValidEmail(value)))
+    require(value.nonEmpty && isValidEmail(value), "Email must be in a valid email format and not be empty.")
     _email = value
   }
 
@@ -71,7 +71,7 @@ class User(userNameP: String, emailP: String, passwordP: String, ageP: Int) {
    * required: the provided password meets the required format and is not empty.
    */
   def password_=(value: String): Unit = {
-    require(value.nonEmpty && isValidPassword(value))
+    require(value.nonEmpty && isValidPassword(value), "Password must be 6 characters long and not empty.")
     _password = value
   }
 
@@ -82,7 +82,7 @@ class User(userNameP: String, emailP: String, passwordP: String, ageP: Int) {
    * required: the provided age is within a valid range.
    */
   def age_=(value: Int): Unit = {
-    require(isValidAge(value))
+    require(isValidAge(value), "Age must be a number between 0-120")
     _age = value
   }
 
